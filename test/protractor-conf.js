@@ -1,10 +1,10 @@
 exports.config = {
-  capabilities: {
-    'browserName': 'phantomjs'
-  },
+  baseUrl: 'http://localhost:3000',
+  //capabilities: {
+  //  'browserName': 'phantomjs'
+  //},
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [
-    //'e2e/*/*.js'
-    'e2e/test.js'
+    'e2e/*/*.js'
   ]
 };

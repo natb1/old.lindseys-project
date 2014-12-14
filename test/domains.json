@@ -1,4 +1,4 @@
 {
-  'foo domain':['hello measure', 'world measure'],
-  'bar domain':['hello measure', 'baz measure']
+  "foo domain":["hello measure", "world measure"],
+  "bar domain":["hello measure", "baz measure"]
 }
