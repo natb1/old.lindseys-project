@@ -1,15 +1,37 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="lindseysApp">
 <head>
   <meta charset="utf-8">
   <title>My HTML File</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="stylesheets/style.css">
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/services.js"></script>
 </head>
-<body>
+<body ng-controller="DomainExplorerCtrl">
 
-  <p>Nothing here {{'yet' + '!'}}</p>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-3">
+        <ul class="nav nav-tabs nav-stacked nav-pills" role="tablist">
+          <li ng-repeat="(domain_name, measures) in domains" ng-class="{'active': selected_domain == domain_name}">
+            <a class="btn-lg" ng-click="select_domain(domain_name)">{{domain_name}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9">
+        {{domains[selected_domain]}}
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
