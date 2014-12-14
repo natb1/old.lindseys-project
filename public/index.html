@@ -27,7 +27,14 @@
       </div>
 
       <div class="col-sm-9">
-        {{domains[selected_domain]}}
+        <accordion>
+          <accordion-group ng-repeat="measure in domains[selected_domain]">
+            <accordion-heading>
+              <div>{{measure}}</div>
+            </accordion-heading>
+            some table of studies
+          </accordion-group>
+        </accordion>
       </div>
 
     </div>

@@ -25,20 +25,31 @@ describe("Lindsey's Project", function(){
 
   var domain_elements = element.all(
     by.repeater('(domain_name, measures) in domains'))
+  var measure_elements = element.all(
+    by.repeater('measure in domains[selected_domain]'))
 
   it('enumerates all domains for selection', function(){
-    var domain_tab_names = domain_elements.map(function(tab_element){
+    domain_elements.map(function(tab_element){
       var tab_name = tab_element.element(by.binding('domain_name')).getText()
       return tab_name
-    })
-    domain_tab_names.then(function(domain_tab_names){
-      domain_tab_names.sort()
-      expect(domain_tab_names).toEqual(Object.keys(domains).sort())
+    }).then(function(domain_tab_names){
+      expect(domain_tab_names.sort()).toEqual(Object.keys(domains).sort())
     })
   })
 
   it('lists all measures in a selected domain', function(){
-    //expect each domain element to have correct list of measures
+    domain_elements.each(function(tab_element){
+      var domain_name_element = tab_element.element(by.binding('domain_name'))
+      domain_name_element.click()
+      domain_name_element.getText().then(function(domain_name){
+        measure_elements.map(function(measure_group){
+          var measure_nm = measure_group.element(by.binding('measure')).getText()
+          return measure_nm
+        }).then(function(measure_names){
+          expect(measure_names.sort()).toEqual(domains[domain_name].sort())
+        })
+      })
+    });
   });
 
   it('lists all studies in a selected measure', function(){
