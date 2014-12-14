@@ -1,0 +1,14 @@
+{
+  'fizz study':{
+    'measures':['hello measure', 'world measure', 'baz measure'],
+  },
+  'buzz study':{
+    'measures':['hello measure', 'baz measure']
+  },
+  'ding study':{
+    'measures':['world measure']
+  },
+  'dong study':{
+    'measures':['baz measure']
+  }
+}
