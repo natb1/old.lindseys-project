@@ -13,9 +13,19 @@
   <script src="js/controllers.js"></script>
   <script src="js/services.js"></script>
 </head>
-<body ng-controller="DomainExplorerCtrl">
+<body ng-controller="NavCtrl">
 
-  <div class="container-fluid">
+  <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+
+  <div ng-controller="DomainExplorerCtrl" class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <h3>Domains</h3>
+      </div>
+      <div class="col-sm-9">
+        <h3 ng-show="selected_domain">Measures</h3>
+      </div>
+    </div>
     <div class="row">
 
       <div class="col-sm-3">
@@ -32,7 +42,18 @@
             <accordion-heading>
               <div>{{measure}}</div>
             </accordion-heading>
-            some table of studies
+            <table class="table">
+              <tr>
+                <td>study</td>
+                <td>url</td>
+                <td>measures</td>
+              </tr>
+              <tr ng-repeat="(study_name, study) in studies[measure]">
+                <td>{{study_name}}</td>
+                <td>{{study.url}}</td>
+                <td>{{study.measures}}</td>
+              </tr>
+            </table>
           </accordion-group>
         </accordion>
       </div>
