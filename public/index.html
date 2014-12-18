@@ -17,7 +17,7 @@
 
   <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
 
-  <table ng-controller="DomainCtrl" style="width:100%">
+  <table ng-controller="DomainCtrl" style="width:100%" ng-class="{'is-disabled': loading}">
     <colgroup>
       <col/>
       <col style="width:61.8%"/>

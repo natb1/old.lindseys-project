@@ -20,3 +20,9 @@ accordion .panel-heading {
 accordion .panel-title div {
   padding: 10px 5px;
 }
+
+/* disable interaction (while loading) */
+.is-disabled {
+    opacity: .5;
+    pointer-events: none;
+}
