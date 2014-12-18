@@ -6,6 +6,17 @@ body {
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 a { cursor: pointer; }
 
+/* puts spacing between the domain and measure column in the domain table */
 .measure-column {
   padding-left: 10px;
+}
+
+/* fixes clickable area for accordion group titles */
+
+accordion .panel-heading {
+  padding: 0
+}
+
+accordion .panel-title div {
+  padding: 10px 5px;
 }

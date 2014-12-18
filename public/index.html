@@ -26,8 +26,8 @@
       <tr>
         <th style="position:relative">
           <h2 class="pull-left">Domains</h2>
-          <a class="btn-sm" style="position:absolute; top:40%" ng-click="new_domain()">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          <a class="btn-sm" style="position:absolute; top:40%" ng-click="new_domain()" aria-label="New Domain">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
           </a>
         </th>
         <th class="measure-column">
@@ -38,11 +38,11 @@
     <tr>
       <td style="vertical-align:top">
         <div class="list-group" role="tablist">
-          <a class="list-group-item" ng-repeat="(domain_name, measures) in domains" ng-class="{'active': selected_domain == domain_name}" ng-click="select_domain(domain_name)">{{domain_name}}</a>
-
-            <!--<button type="button" class="btn btn-default" aria-label="Edit Domain">
-              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-            </button>-->
+          <div ng-repeat="(domain_name, measures) in domains">
+            <a class="list-group-item" ng-class="{'active': selected_domain == domain_name}" ng-click="select_domain(domain_name)">
+              {{domain_name}}
+            </a>
+          </div>
         </div>
       </td>
       <td class="measure-column">
