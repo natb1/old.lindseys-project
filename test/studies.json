@@ -1,14 +1,18 @@
 {
   "fizz study":{
-    "measures":["hello measure", "world measure", "baz measure"]
+    "measures":["hello measure", "world measure", "baz measure"],
+    "url":"http://fizz.example.com"
   },
   "buzz study":{
-    "measures":["hello measure", "baz measure"]
+    "measures":["hello measure", "baz measure"],
+    "url":"http://buzz.example.com"
   },
   "ding study":{
-    "measures":["world measure"]
+    "measures":["world measure"],
+    "url":"http://ding.example.com"
   },
   "dong study":{
-    "measures":["baz measure"]
+    "measures":["baz measure", "fizz measure"],
+    "url":"http://dong.example.com"
   }
 }
