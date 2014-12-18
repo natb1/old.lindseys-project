@@ -4,3 +4,8 @@ body {
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+a { cursor: pointer; }
+
+.measure-column {
+  padding-left: 10px;
+}

@@ -17,26 +17,35 @@
 
   <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
 
-  <div ng-controller="DomainExplorerCtrl" class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3">
-        <h3>Domains</h3>
-      </div>
-      <div class="col-sm-9">
-        <h3 ng-show="selected_domain">Measures</h3>
-      </div>
-    </div>
-    <div class="row">
+  <table ng-controller="DomainCtrl" style="width:100%">
+    <colgroup>
+      <col/>
+      <col style="width:61.8%"/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th style="position:relative">
+          <h2 class="pull-left">Domains</h2>
+          <a class="btn-sm" style="position:absolute; top:40%" ng-click="new_domain()">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          </a>
+        </th>
+        <th class="measure-column">
+          <h2 ng-show="selected_domain"><small>Measures</small></h2>
+        </th>
+      </tr>
+    </thead>
+    <tr>
+      <td style="vertical-align:top">
+        <div class="list-group" role="tablist">
+          <a class="list-group-item" ng-repeat="(domain_name, measures) in domains" ng-class="{'active': selected_domain == domain_name}" ng-click="select_domain(domain_name)">{{domain_name}}</a>
 
-      <div class="col-sm-3">
-        <ul class="nav nav-tabs nav-stacked nav-pills" role="tablist">
-          <li ng-repeat="(domain_name, measures) in domains" ng-class="{'active': selected_domain == domain_name}">
-            <a class="btn-lg" ng-click="select_domain(domain_name)">{{domain_name}}</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="col-sm-9">
+            <!--<button type="button" class="btn btn-default" aria-label="Edit Domain">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>-->
+        </div>
+      </td>
+      <td class="measure-column">
         <accordion>
           <accordion-group ng-repeat="measure in domains[selected_domain]">
             <accordion-heading>
@@ -56,10 +65,9 @@
             </table>
           </accordion-group>
         </accordion>
-      </div>
-
-    </div>
-  </div>
+      </td>
+    </tr>
+  </table>
 
 </body>
 </html>

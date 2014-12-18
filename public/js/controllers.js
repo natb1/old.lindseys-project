@@ -7,7 +7,7 @@ controllers.controller('NavCtrl', ['$scope', 'alerts',
   }
 ]);
 
-controllers.controller('DomainExplorerCtrl', ['$scope', 'Domains', 'Studies', 'alerts',
+controllers.controller('DomainCtrl', ['$scope', 'Domains', 'Studies', 'alerts',
   function ($scope, Domains, Studies) {
 
     $scope.domains = Domains.get()
@@ -34,6 +34,8 @@ controllers.controller('DomainExplorerCtrl', ['$scope', 'Domains', 'Studies', 'a
         }
       )
     }
+
+    $scope.new_domain = function(){}
 
   }
 ]);
