@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h3 class="modal-title">New Study</h3>
+    <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+</div>
+
+<div class="modal-body">
+  <form role="form">
+    <div class="form-group">
+      <label for="titleInput">Title</label>
+      <input type="text" class="form-control" id="titleInput" ng-model="title">
+    </div>
+    <div class="form-group">
+      <label for="referenceInput">Reference</label>
+      <textarea class="form-control" id="referenceInput" rows="3" ng-model="reference">
+      </textarea>
+    </div>
+    <div class="form-group">
+      <label for="measureList">Measures</label>
+      <ul class="list-group" id="measureList">
+        <li class="list-group-item" ng-repeat="(measure_name, measure) in has_measures">
+          {{measure_name}}
+          <button type="button" class="close" ng-click="delete_measure_from_study(measure_name)">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+        </li>
+        <li class="list-group-item">
+          <select class="form-control" ng-model="selected_measure">
+            <option ng-repeat="(measure_name, measure) in measures" ng-hide="in_study(measure_name)">{{measure_name}}</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

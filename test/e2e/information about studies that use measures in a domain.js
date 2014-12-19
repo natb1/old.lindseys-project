@@ -7,7 +7,7 @@ var utils = require('../utils')
 describe("Lindsey's Project", function(){
 
   beforeEach(function(){
-    browser.get('')
+    browser.get('/#/domains')
   });
 
   var studies_with = {} //studies_with[measure]

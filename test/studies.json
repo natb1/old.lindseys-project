@@ -1,18 +1,18 @@
 {
   "fizz study":{
     "measures":["hello measure", "world measure", "baz measure"],
-    "url":"http://fizz.example.com"
+    "reference":"some fizz reference"
   },
   "buzz study":{
     "measures":["hello measure", "baz measure"],
-    "url":"http://buzz.example.com"
+    "reference":"some buzz reference"
   },
   "ding study":{
     "measures":["world measure"],
-    "url":"http://ding.example.com"
+    "reference":"some ding reference"
   },
   "dong study":{
     "measures":["baz measure", "fizz measure"],
-    "url":"http://dong.example.com"
+    "reference":"some dong reference"
   }
 }

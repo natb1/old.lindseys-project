@@ -17,4 +17,10 @@ router.get('/', function(req, res) {
   res.send(studies_with_measure);
 });
 
+router.put('/:title', function(req, res){
+  console.log(req.param('title'), req.body)
+  studies[req.param('title')] = req.body
+  res.status(204).end()
+});
+
 module.exports = router;

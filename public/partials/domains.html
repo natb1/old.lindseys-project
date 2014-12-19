@@ -1,0 +1,54 @@
+<table style="width:100%" ng-class="{'is-disabled': loading}">
+  <colgroup>
+    <col/>
+    <col style="width:61.8%"/>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>
+        <h2>
+          Domains
+          <a class="btn-sm" style="vertical-align: middle" ng-click="edit_domains()" aria-label="New Domain">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+          </a>
+        </h2>
+      </th>
+      <th class="measure-column">
+        <h2 ng-show="selected_domain"><small>Measures</small></h2>
+      </th>
+    </tr>
+  </thead>
+  <tr>
+    <td style="vertical-align:top">
+      <div class="list-group" role="tablist">
+        <div ng-repeat="(domain_name, measures) in domains">
+          <a class="list-group-item" ng-class="{'active': selected_domain == domain_name}" ng-click="select_domain(domain_name)">
+            {{domain_name}}
+          </a>
+        </div>
+      </div>
+    </td>
+    <td class="measure-column">
+      <accordion>
+        <accordion-group ng-repeat="measure in domains[selected_domain]">
+          <accordion-heading>
+            <div>{{measure}}</div>
+          </accordion-heading>
+          <table class="table">
+            <tr>
+              <td></td>
+              <td>reference</td>
+              <td>measures</td>
+            </tr>
+            <tr ng-repeat="(study_name, study) in studies[measure]">
+              <td>{{study_name}}</td>
+              <td>{{study.reference}}</td>
+              <td>{{study.measures}}</td>
+            </tr>
+          </table>
+        </accordion-group>
+      </accordion>
+    </td>
+  </tr>
+</table>
+

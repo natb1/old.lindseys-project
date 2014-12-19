@@ -8,6 +8,7 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/async/lib/async.js"></script>
   <script src="js/app.js"></script>
@@ -16,59 +17,11 @@
 </head>
 <body ng-controller="NavCtrl">
 
-  <alert ng-show="!loading" ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+  <alert ng-show="!loading" ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">
+    {{alert.msg}}
+  </alert>
 
-  <table ng-controller="DomainCtrl" style="width:100%" ng-class="{'is-disabled': loading}">
-    <colgroup>
-      <col/>
-      <col style="width:61.8%"/>
-    </colgroup>
-    <thead>
-      <tr>
-        <th>
-          <h2 style="display:inline-block">Domains</h2>
-          <a class="btn-sm" style="vertical-align: super" ng-click="new_domain()" aria-label="New Domain">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-          </a>
-        </th>
-        <th class="measure-column">
-          <h2 ng-show="selected_domain"><small>Measures</small></h2>
-        </th>
-      </tr>
-    </thead>
-    <tr>
-      <td style="vertical-align:top">
-        <div class="list-group" role="tablist">
-          <div ng-repeat="(domain_name, measures) in domains">
-            <a class="list-group-item" ng-class="{'active': selected_domain == domain_name}" ng-click="select_domain(domain_name)">
-              {{domain_name}}
-            </a>
-          </div>
-        </div>
-      </td>
-      <td class="measure-column">
-        <accordion>
-          <accordion-group ng-repeat="measure in domains[selected_domain]">
-            <accordion-heading>
-              <div>{{measure}}</div>
-            </accordion-heading>
-            <table class="table">
-              <tr>
-                <td>study</td>
-                <td>url</td>
-                <td>measures</td>
-              </tr>
-              <tr ng-repeat="(study_name, study) in studies[measure]">
-                <td>{{study_name}}</td>
-                <td>{{study.url}}</td>
-                <td>{{study.measures}}</td>
-              </tr>
-            </table>
-          </accordion-group>
-        </accordion>
-      </td>
-    </tr>
-  </table>
+  <div ng-view></div>
 
 </body>
 </html>

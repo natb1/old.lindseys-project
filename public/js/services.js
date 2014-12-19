@@ -17,7 +17,10 @@ services.factory('Measures', ['$resource',
 
 services.factory('Studies', ['$resource',
   function($resource){
-    return $resource('studies')
+    return $resource('studies/:title', null,
+      {
+        'put': {method:'PUT'}
+      })
   }
 ]);
 

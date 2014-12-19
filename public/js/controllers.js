@@ -7,7 +7,7 @@ controllers.controller('NavCtrl', ['$scope', 'alerts',
   }
 ]);
 
-controllers.controller('DomainCtrl', ['$scope', '$modal', 'Domains', 'Studies', 'alerts', '$rootScope',
+controllers.controller('DomainsCtrl', ['$scope', '$modal', 'Domains', 'Studies', 'alerts', '$rootScope',
   function ($scope, $modal, Domains, Studies, alerts, $rootScope) {
 
     $scope.studies = {}
@@ -42,29 +42,31 @@ controllers.controller('DomainCtrl', ['$scope', '$modal', 'Domains', 'Studies', 
       )
     }
 
-    $scope.new_domain = function(){
-
+    $scope.edit_domains = function(){
       $rootScope.loading = true
+      var modalInstance = $modal.open(_domains_edit_modal)
+      modalInstance.result.then(
+        function(new_domain){ throw 'not implemented' },
+        _handle_domain_edit_dismiss
+      );
+    }
 
-      var modalInstance = $modal.open({
-        templateUrl: 'partials/domains-edit.html',
-        controller: 'DomainNewCtrl',
-        resolve: {
-            domains: function(){ return $scope.domains }
-        }
+    _domains_edit_modal = {
+      templateUrl: 'partials/domains-edit.html',
+      controller: 'DomainNewCtrl',
+      resolve: {
+          domains: function(){ return $scope.domains }
+      }
+    }
+
+    _handle_domain_edit_dismiss = function(reason){
+      $scope.domains = Domains.get(function(){
+        $rootScope.loading = false
+      }, function(error){
+        message = 'failed to download domains'
+        alerts.add_alert(message, 'danger')
+        console.log(error)
       })
-
-      modalInstance.result.then(function(new_domain){
-        //not implemented
-      }, function(reason){
-        $scope.domains = Domains.get(function(){
-          $rootScope.loading = false
-        }, function(error){
-          message = 'failed to download domains'
-          alerts.add_alert(message, 'danger')
-          console.log(error)
-        })
-      });
     }
 
   }
@@ -173,6 +175,104 @@ controllers.controller('DomainNewCtrl', ['$scope', '$modalInstance', 'alerts', '
           }
         );
       }, done_delete);
+    }
+
+    $scope.cancel = function(){
+      $modalInstance.dismiss('cancel')
+    }
+  }
+])
+
+controllers.controller('LandingCtrl', ['$scope',
+  function($scope){
+  }
+]);
+
+controllers.controller('StudiesCtrl', ['$scope', 'Studies', 'alerts', '$modal', '$rootScope',
+  function($scope, Studies, alerts, $modal, $rootScope){
+
+    $scope.studies = Studies.get(
+      function(){
+        //do nothing
+      }, function(error){
+        message = 'failed to download studies'
+        alerts.add_alert(message, 'danger')
+        console.log(error)
+      }
+    )
+
+    $scope.new_study = function(){
+      $rootScope.loading = true
+      var modalInstance = $modal.open(_study_new_modal)
+      modalInstance.result.then(
+        function(new_domain){ throw 'not implemented' },
+        _handle_study_new_dismiss
+      );
+    }
+
+    _study_new_modal = {
+      templateUrl: 'partials/study-new.html',
+      controller: 'StudyNewCtrl',
+      resolve: {
+          studies: function(){ return $scope.studies }
+      }
+    }
+
+    _handle_study_new_dismiss = function(reason){
+      $scope.studies = Studies.get(function(){
+        $rootScope.loading = false
+      }, function(error){
+        message = 'failed to download studies'
+        alerts.add_alert(message, 'danger')
+        console.log(error)
+      })
+    }
+
+  }
+]);
+
+controllers.controller('StudyNewCtrl', ['$scope', '$modalInstance', 'studies', 'Measures', 'Studies',
+  function($scope, $modalInstance, studies, Measures, Studies){
+
+    $scope.has_measures = {}
+    $scope.measures = Measures.get(
+      function(){},
+      function(error){
+        message = 'failed to download measures'
+        alerts.add_alert(message, 'danger')
+        console.log(error)
+      }
+    )
+
+    $scope.delete_measure_from_study = function(measure_name){
+      delete $scope.has_measures[measure_name]
+    }
+
+    $scope.in_study = function(measure_name){
+      return measure_name in $scope.has_measures
+    }
+
+    $scope.$watch('selected_measure', function(newValue, oldValue){
+      if (newValue){
+        $scope.has_measures[$scope.selected_measure] = true
+        $scope.selected_measure = undefined
+      }
+    });
+
+    $scope.ok = function(){
+      study = {
+        "reference": $scope.reference,
+        "measures": Object.keys($scope.has_measures)
+      }
+      Studies.put({title:$scope.title}, study,
+        function(){
+          $modalInstance.dismiss('ok')
+        }, function(error){
+          message = 'failed to put new study'
+          alerts.add_alert(message, 'danger')
+          console.log(error)
+        }
+      )
     }
 
     $scope.cancel = function(){

@@ -24,12 +24,12 @@
 
   <hr/>
   <div ng-show="selected_domain">
-    <div style="position:relative">
-      <h4 style="display:inline-block">{{selected_domain}}</h4>
-      <button type="button" class="btn btn-default btn-xs" style="border:0;margin-left:8px" aria-label="Delete Selected Domain" ng-click="delete_domain()">
+    <h4 style="display:inline-block">
+      {{selected_domain}}
+      <button type="button" class="btn btn-default btn-xs" style="vertical-align:middle;border:0;margin-left:8px" aria-label="Delete Selected Domain" ng-click="delete_domain()">
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
       </button>
-    </div>
+    </h4>
     <h4 ng-show="selected_domain"><small>Measures</small></h4>
   
     <ul class="list-group">
