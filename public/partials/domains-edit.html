@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h3 class="modal-title">Edit Domains</h3>
+    <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+</div>
+
+<div class="modal-body">
+  <form class="form-inline" role="form" ng-submit="new_domain()">
+    <select class="form-control" ng-model="selected_domain">
+      <option ng-repeat="(domain, measures) in domains">{{domain}}</option>
+    </select>
+    
+    <div class="form-group">
+      <div class="input-group">
+        <label class="sr-only" for="newDomainInput">Enter New Domain</label>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" style="border-radius:0" ng-click="new_domain()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </span>
+        <input type="text" class="form-control" id="newDomainInput" placeholder="New Domain" ng-model="new_domain_input">
+      </div>
+    </div>
+  </form>
+
+  <hr/>
+  <div ng-show="selected_domain">
+    <div style="position:relative">
+      <h4 style="display:inline-block">{{selected_domain}}</h4>
+      <button type="button" class="btn btn-default btn-xs" style="border:0;margin-left:8px" aria-label="Delete Selected Domain" ng-click="delete_domain()">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
+    </div>
+    <h4 ng-show="selected_domain"><small>Measures</small></h4>
+  
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="(measure_name, measure) in measures" ng-show="in_domain(selected_domain, measure_name)">
+        {{measure_name}}
+        <button type="button" class="close" ng-click="delete_measure_from_domain(measure_name)"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </li>
+      <li class="list-group-item">
+        <select class="form-control" ng-model="selected_measure">
+          <option ng-repeat="(measure_name, measure) in measures" ng-hide="in_domain(selected_domain, measure_name)">{{measure_name}}</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

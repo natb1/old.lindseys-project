@@ -2,7 +2,16 @@ var services = angular.module('lindseysServices', ['ngResource']);
 
 services.factory('Domains', ['$resource',
   function($resource){
-    return $resource('domains')
+    return $resource('domains/:domain_name', null,
+      {
+        'put': {method:'PUT'}
+      });
+  }
+]);
+
+services.factory('Measures', ['$resource',
+  function($resource){
+    return $resource('measures')
   }
 ]);
 

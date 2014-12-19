@@ -9,13 +9,14 @@
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/async/lib/async.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/services.js"></script>
 </head>
 <body ng-controller="NavCtrl">
 
-  <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+  <alert ng-show="!loading" ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
 
   <table ng-controller="DomainCtrl" style="width:100%" ng-class="{'is-disabled': loading}">
     <colgroup>
@@ -24,9 +25,9 @@
     </colgroup>
     <thead>
       <tr>
-        <th style="position:relative">
-          <h2 class="pull-left">Domains</h2>
-          <a class="btn-sm" style="position:absolute; top:40%" ng-click="new_domain()" aria-label="New Domain">
+        <th>
+          <h2 style="display:inline-block">Domains</h2>
+          <a class="btn-sm" style="vertical-align: super" ng-click="new_domain()" aria-label="New Domain">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
           </a>
         </th>
