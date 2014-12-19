@@ -1,8 +1,8 @@
 'use strict';
 
-var domains = require('../../domains')
-var studies = require('../../studies')
-var utils = require('../../utils')
+var domains = require('../domains')
+var studies = require('../studies')
+var utils = require('../utils')
 
 describe("Lindsey's Project", function(){
 
