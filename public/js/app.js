@@ -1,5 +1,6 @@
 var app = angular.module('lindseysApp', [
   'ui.bootstrap',
+  'ui.grid',
   'ngRoute',
   'lindseysControllers',
   'lindseysServices'

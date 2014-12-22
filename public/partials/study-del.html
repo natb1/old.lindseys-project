@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title">Delete Study</h3>
+    <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+</div>
+
+<div class="modal-body">
+<h4>{{title}}</h4>
+{{study}}
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

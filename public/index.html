@@ -4,12 +4,14 @@
   <meta charset="utf-8">
   <title>My HTML File</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css">
   <link rel="stylesheet" href="stylesheets/style.css">
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
   <script src="bower_components/async/lib/async.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
@@ -41,7 +43,8 @@
     {{alert.msg}}
   </alert>
 
-  <div ng-view></div>
+  <div ng-show="loading">loading...</div>
+  <div ng-view ng-class="{'is-disabled': loading}"></div>
 
 </body>
 </html>

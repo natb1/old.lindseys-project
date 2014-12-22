@@ -4,3 +4,22 @@
     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
   </a>
 </h2>
+
+<!-- <div ui-grid="{data: Object.keys(studies)}" class="study-grid"></div> -->
+<table class='table'>
+  <tr ng-repeat="(title, study) in studies">
+    <td>{{title}}</td>
+    <td>{{study.reference}}</td>
+    <td>{{study.measures}}</td>
+    <td>
+      <button type="button" class="btn btn-default btn-xs" style="border:0" aria-label="Edit Study" ng-click="edit(title)">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      </button>
+    </td>
+    <td>
+      <button type="button" class="btn btn-default btn-xs" style="border:0" aria-label="Delete Study" ng-click="del(title)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
+    </td>
+  </tr>
+</table>

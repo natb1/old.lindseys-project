@@ -206,22 +206,50 @@ controllers.controller('StudiesCtrl', ['$scope', 'Studies', 'alerts', '$modal', 
 
     $scope.new_study = function(){
       $rootScope.loading = true
-      var modalInstance = $modal.open(_study_new_modal)
-      modalInstance.result.then(
+      var modalInstance = $modal.open({
+        templateUrl: 'partials/study-edit.html',
+        controller: 'StudyEditCtrl',
+        resolve: {
+          title: function(){ return undefined },
+          study: function(){ return {} }
+        }
+      }).result.then(
         function(new_domain){ throw 'not implemented' },
-        _handle_study_new_dismiss
+        _handle_study_edit_dismiss
       );
     }
 
-    _study_new_modal = {
-      templateUrl: 'partials/study-new.html',
-      controller: 'StudyNewCtrl',
-      resolve: {
-          studies: function(){ return $scope.studies }
-      }
+    $scope.edit = function(title){
+      $rootScope.loading = true
+      var modalInstance = $modal.open({
+        templateUrl: 'partials/study-edit.html',
+        controller: 'StudyEditCtrl',
+        resolve: {
+          title: function(){ return title },
+          study: function(){ return $scope.studies[title] }
+        }
+      }).result.then(
+        function(new_domain){ throw 'not implemented' },
+        _handle_study_edit_dismiss
+      );
     }
 
-    _handle_study_new_dismiss = function(reason){
+    $scope.del = function(title){
+      $rootScope.loading = true
+      $modal.open({
+        templateUrl: 'partials/study-del.html',
+        controller: 'StudyDelCtrl',
+        resolve: {
+          title: function(){ return title },
+          study: function(){ return $scope.studies[title] }
+        }
+      }).result.then(
+        function(){ throw 'not implemented' },
+        _handle_study_edit_dismiss
+      );
+    }
+
+    _handle_study_edit_dismiss = function(reason){
       $scope.studies = Studies.get(function(){
         $rootScope.loading = false
       }, function(error){
@@ -234,10 +262,17 @@ controllers.controller('StudiesCtrl', ['$scope', 'Studies', 'alerts', '$modal', 
   }
 ]);
 
-controllers.controller('StudyNewCtrl', ['$scope', '$modalInstance', 'studies', 'Measures', 'Studies',
-  function($scope, $modalInstance, studies, Measures, Studies){
+controllers.controller('StudyEditCtrl', ['$scope', '$modalInstance', 'Measures', 'Studies', 'alerts', 'title', 'study',
+  function($scope, $modalInstance, Measures, Studies, alerts, title, study){
 
+    $scope.title = title
+    $scope.study = study
+    $scope.get_alerts = alerts.get_alerts
+    $scope.close_alert = alerts.close_alert
     $scope.has_measures = {}
+    $scope.study.measures.forEach(function(measure){
+      $scope.has_measures[measure] = true
+    })
     $scope.measures = Measures.get(
       function(){},
       function(error){
@@ -263,10 +298,7 @@ controllers.controller('StudyNewCtrl', ['$scope', '$modalInstance', 'studies', '
     });
 
     $scope.ok = function(){
-      study = {
-        "reference": $scope.reference,
-        "measures": Object.keys($scope.has_measures)
-      }
+      $scope.study.measures = Object.keys($scope.has_measures)
       Studies.put({title:$scope.title}, study,
         function(){
           $modalInstance.dismiss('ok')
@@ -283,3 +315,29 @@ controllers.controller('StudyNewCtrl', ['$scope', '$modalInstance', 'studies', '
     }
   }
 ])
+
+controllers.controller('StudyDelCtrl', ['$scope', 'title', 'study', 'Studies', '$modalInstance', 'alerts',
+  function($scope, title, study, Studies, $modalInstance, alerts){
+
+    $scope.get_alerts = alerts.get_alerts
+    $scope.close_alert = alerts.close_alert
+    $scope.study = study
+    $scope.title = title
+
+    $scope.ok = function(){
+      Studies.delete({title:$scope.title},
+        function(){
+          $modalInstance.dismiss('ok')
+        }, function(error){
+          message = 'failed to delete study'
+          alerts.add_alert(message, 'danger')
+          console.log(error)
+        }
+      )
+    }
+     
+    $scope.cancel = function(){
+      $modalInstance.dismiss('cancel')
+    }
+  }
+]);
