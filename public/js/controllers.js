@@ -211,7 +211,7 @@ controllers.controller('StudiesCtrl', ['$scope', 'Studies', 'alerts', '$modal', 
         controller: 'StudyEditCtrl',
         resolve: {
           title: function(){ return undefined },
-          study: function(){ return {} }
+          study: function(){ return {measures: []} }
         }
       }).result.then(
         function(new_domain){ throw 'not implemented' },
@@ -265,6 +265,7 @@ controllers.controller('StudiesCtrl', ['$scope', 'Studies', 'alerts', '$modal', 
 controllers.controller('StudyEditCtrl', ['$scope', '$modalInstance', 'Measures', 'Studies', 'alerts', 'title', 'study',
   function($scope, $modalInstance, Measures, Studies, alerts, title, study){
 
+    $scope.is_new = (title === undefined)
     $scope.title = title
     $scope.study = study
     $scope.get_alerts = alerts.get_alerts
