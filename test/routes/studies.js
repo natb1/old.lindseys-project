@@ -1,4 +1,4 @@
-studies = require('../test/studies')
+studies = require('../studies')
 
 var express = require('express');
 var router = express.Router();

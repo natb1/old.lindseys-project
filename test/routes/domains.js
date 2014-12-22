@@ -1,4 +1,4 @@
-domains = require('../test/domains')
+domains = require('../domains')
 
 var express = require('express');
 var router = express.Router();

@@ -1,9 +1,12 @@
 var controllers = angular.module('lindseysControllers', []);
 
-controllers.controller('NavCtrl', ['$scope', 'alerts',
-  function ($scope, alerts){
+controllers.controller('NavCtrl', ['$scope', 'alerts', '$location',
+  function ($scope, alerts, $location){
     $scope.get_alerts = alerts.get_alerts
     $scope.close_alert = alerts.close_alert
+    $scope.is_active = function(page){
+      return $location.path() == '/'+page
+    }
   }
 ]);
 

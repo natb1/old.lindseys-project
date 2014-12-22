@@ -1,4 +1,4 @@
-measures = require('../test/measures')
+measures = require('../measures')
 
 var express = require('express');
 var router = express.Router();
