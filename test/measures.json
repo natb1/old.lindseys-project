@@ -1,6 +1,18 @@
 {
-  "hello measure":{},
-  "world measure":{},
-  "fizz measure":{},
-  "baz measure":{}
+  "hello measure":{
+    "reference":"hello reference",
+    "description":"hello description"
+  },
+  "world measure":{
+    "reference":"world reference",
+    "description":"world description"
+  },
+  "fizz measure":{
+    "reference":"fizz reference",
+    "description":"fizz description"
+  },
+  "baz measure":{
+    "reference":"baz reference",
+    "description":"baz description"
+  }
 }

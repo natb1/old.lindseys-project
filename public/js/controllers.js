@@ -342,3 +342,127 @@ controllers.controller('StudyDelCtrl', ['$scope', 'title', 'study', 'Studies', '
     }
   }
 ]);
+
+controllers.controller('MeasuresCtrl', ['$scope', 'Measures', 'alerts', '$modal', '$rootScope',
+  function($scope, Measures, alerts, $modal, $rootScope){
+
+    $scope.measures = Measures.get(
+      function(){
+        //do nothing
+      }, function(error){
+        message = 'failed to download measures'
+        alerts.add_alert(message, 'danger')
+        console.log(error)
+      }
+    )
+
+    $scope.new_measure = function(){
+      $rootScope.loading = true
+      var modalInstance = $modal.open({
+        templateUrl: 'partials/measure-edit.html',
+        controller: 'MeasureEditCtrl',
+        resolve: {
+          name: function(){ return undefined },
+          measure: function(){ return {} }
+        }
+      }).result.then(
+        function(){ throw 'not implemented' },
+        _handle_measure_edit_dismiss
+      );
+    }
+
+    $scope.edit = function(name){
+      $rootScope.loading = true
+      var modalInstance = $modal.open({
+        templateUrl: 'partials/measure-edit.html',
+        controller: 'MeasureEditCtrl',
+        resolve: {
+          name: function(){ return name },
+          measure: function(){ return $scope.measures[name] }
+        }
+      }).result.then(
+        function(new_domain){ throw 'not implemented' },
+        _handle_measure_edit_dismiss
+      );
+    }
+
+    $scope.del = function(name){
+      $rootScope.loading = true
+      $modal.open({
+        templateUrl: 'partials/measure-del.html',
+        controller: 'MeasureDelCtrl',
+        resolve: {
+          name: function(){ return name },
+          measure: function(){ return $scope.measures[name] }
+        }
+      }).result.then(
+        function(){ throw 'not implemented' },
+        _handle_measure_edit_dismiss
+      );
+    }
+
+    _handle_measure_edit_dismiss = function(reason){
+      $scope.measures = Measures.get(function(){
+        $rootScope.loading = false
+      }, function(error){
+        message = 'failed to download measures'
+        alerts.add_alert(message, 'danger')
+        console.log(error)
+      })
+    }
+
+  }
+]);
+
+controllers.controller('MeasureEditCtrl', ['$scope', '$modalInstance', 'alerts', 'name', 'measure', 'Measures',
+  function($scope, $modalInstance, alerts, name, measure, Measures){
+
+    $scope.is_new = (name === undefined)
+    $scope.name = name
+    $scope.measure = measure
+    $scope.get_alerts = alerts.get_alerts
+    $scope.close_alert = alerts.close_alert
+
+    $scope.ok = function(){
+      Measures.put({name:$scope.name}, $scope.measure,
+        function(){
+          $modalInstance.dismiss('ok')
+        }, function(error){
+          message = 'failed to put new measure'
+          alerts.add_alert(message, 'danger')
+          console.log(error)
+        }
+      )
+    }
+
+    $scope.cancel = function(){
+      $modalInstance.dismiss('cancel')
+    }
+  }
+])
+
+controllers.controller('MeasureDelCtrl', ['$scope', 'name', 'measure', 'Measures', '$modalInstance', 'alerts',
+  function($scope, name, measure, Measures, $modalInstance, alerts){
+
+    $scope.get_alerts = alerts.get_alerts
+    $scope.close_alert = alerts.close_alert
+    $scope.measure = measure
+    $scope.name = name
+
+    $scope.ok = function(){
+      Measures.delete({name:$scope.name},
+        function(){
+          $modalInstance.dismiss('ok')
+        }, function(error){
+          message = 'failed to delete measure'
+          alerts.add_alert(message, 'danger')
+          console.log(error)
+        }
+      )
+    }
+     
+    $scope.cancel = function(){
+      $modalInstance.dismiss('cancel')
+    }
+  }
+]);

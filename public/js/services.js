@@ -11,7 +11,10 @@ services.factory('Domains', ['$resource',
 
 services.factory('Measures', ['$resource',
   function($resource){
-    return $resource('measures')
+    return $resource('measures/:name', null,
+      {
+        'put': {method:'PUT'}
+      })
   }
 ]);
 

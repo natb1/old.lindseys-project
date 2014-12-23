@@ -1,0 +1,24 @@
+<h2>
+  Measures
+  <a class="btn-sm" style="vertical-align: middle" ng-click="new_measure()" aria-label="New Measure">
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+  </a>
+</h2>
+
+<table class='table'>
+  <tr ng-repeat="(name, measure) in measures">
+    <td>{{name}}</td>
+    <td>{{measure.reference}}</td>
+    <td>{{measure.description}}</td>
+    <td>
+      <button type="button" class="btn btn-default btn-xs" style="border:0" aria-label="Edit Measure" ng-click="edit(name)">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      </button>
+    </td>
+    <td>
+      <button type="button" class="btn btn-default btn-xs" style="border:0" aria-label="Delete Measure" ng-click="del(name)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
+    </td>
+  </tr>
+</table>

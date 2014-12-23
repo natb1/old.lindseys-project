@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-show="is_new">New Measure</h3>
+    <h3 class="modal-title" ng-hide="is_new">Edit Measure</h3>
+    <alert ng-repeat="alert in get_alerts()" type="{{alert.type}}" close="close_alert($index)">{{alert.msg}}</alert>
+</div>
+
+<div class="modal-body">
+  <form role="form">
+    <div class="form-group">
+      <label for="nameInput">Name</label>
+      <input type="text" class="form-control" id="nameInput" ng-model="name">
+    </div>
+    <div class="form-group">
+      <label for="referenceInput">Reference</label>
+      <textarea class="form-control" id="referenceInput" rows="3" ng-model="measure.reference">
+      </textarea>
+    </div>
+    <div class="form-group">
+      <label for="descriptionInput">Description</label>
+      <textarea class="form-control" id="descriptionInput" rows="3" ng-model="measure.description">
+      </textarea>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
