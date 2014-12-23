@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = (process.env.DEBUG ? './test/routes/' : './routes/')
 //var index = require(routes+'index');
-var users = require(routes+'users');
+//var users = require(routes+'users');
 var domains = require(routes+'domains');
 var studies = require(routes+'studies');
 var measures = require(routes+'measures');
@@ -29,7 +29,7 @@ app.use('/bower_components',
   express.static(path.join(__dirname, 'bower_components')));
 
 //app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
 app.use('/domains', domains);
 app.use('/studies', studies);
 app.use('/measures', measures);
