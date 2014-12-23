@@ -12,7 +12,8 @@
     "morgan": "~1.3.0",
     "serve-favicon": "~2.1.3",
     "debug": "~2.0.0",
-    "jade": "~1.6.0"
+    "jade": "~1.6.0",
+    "s3_utils": "git://github.com/natb1/s3_utils"
   },
   "devDependencies": {
     "bower": "~1.3.12",
