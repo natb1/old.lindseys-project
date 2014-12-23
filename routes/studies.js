@@ -1,4 +1,4 @@
-var s3_utils = require('../../s3_utils/s3_utils')
+var s3_utils = require('s3_utils')
 var express = require('express');
 var router = express.Router();
 
