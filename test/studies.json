@@ -1,18 +1,22 @@
 {
   "fizz study":{
     "measures":["hello measure", "world measure", "baz measure"],
-    "reference":"some fizz reference"
+    "reference":"some fizz reference",
+    "program":"bang program"
   },
   "buzz study":{
     "measures":["hello measure", "baz measure"],
-    "reference":"some buzz reference"
+    "reference":"some buzz reference",
+    "program":"bang program"
   },
   "ding study":{
     "measures":["world measure"],
-    "reference":"some ding reference"
+    "reference":"some ding reference",
+    "program":"boom program"
   },
   "dong study":{
     "measures":["baz measure", "fizz measure"],
-    "reference":"some dong reference"
+    "reference":"some dong reference",
+    "program":"boom program"
   }
 }
