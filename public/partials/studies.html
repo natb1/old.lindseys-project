@@ -7,8 +7,15 @@
 
 <!-- <div ui-grid="{data: Object.keys(studies)}" class="study-grid"></div> -->
 <table class='table'>
+  <tr>
+    <th></th>
+    <th>program</th>
+    <th>reference</th>
+    <th>measures</th>
+  </tr>
   <tr ng-repeat="(title, study) in studies">
     <td>{{title}}</td>
+    <td>{{study.program}}</td>
     <td>{{study.reference}}</td>
     <td>{{study.measures}}</td>
     <td>
