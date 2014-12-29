@@ -11,12 +11,14 @@
     <th></th>
     <th>program</th>
     <th>reference</th>
+    <th>description</th>
     <th>measures</th>
   </tr>
   <tr ng-repeat="(title, study) in studies">
     <td>{{title}}</td>
     <td>{{study.program}}</td>
     <td>{{study.reference}}</td>
+    <td>{{study.description}}</td>
     <td>{{study.measures}}</td>
     <td>
       <button type="button" class="btn btn-default btn-xs" style="border:0" aria-label="Edit Study" ng-click="edit(title)">

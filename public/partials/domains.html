@@ -39,12 +39,14 @@
               <th></th>
               <th>program</th>
               <th>reference</th>
+              <th>description</th>
               <th>measures</th>
             </tr>
             <tr ng-repeat="(study_name, study) in studies[measure]">
               <td>{{study_name}}</td>
               <td>{{study.program}}</td>
               <td>{{study.reference}}</td>
+              <td>{{study.description}}</td>
               <td>{{study.measures}}</td>
             </tr>
           </table>
